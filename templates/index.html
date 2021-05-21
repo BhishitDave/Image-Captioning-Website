@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- {{url_for('static',filename='')}} -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Image Caption Generator</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/css/styles.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/bootstrap/css/bootstrap.min.css')}}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:700">
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/fonts/font-awesome.min.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/css/Sleek-Image-Input-with-Preview.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/css/Team-Boxed.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/fonts/fontawesome-all.min.css')}}">
+    <link rel="stylesheet"
+        href="{{url_for('static',filename='assets/css/Team-Presentation---2-Persons---Social-Media-Icon.css')}}">
+    <style type="text/css">
+        .heading {
+            font-weight: 100;
+            font-size: 4em;
+            text-shadow: 1px 1px 5px black;
+        }
+
+        .images {
+            height: 90%;
+            width: 100%;
+        }
+
+        .text {
+            font-size: 32px;
+            font-style: italic;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <nav class="navbar navbar-light navbar-expand-md fixed-top" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#">HOME</a><button
+                data-toggle="collapse" class="navbar-toggler navbar-toggler-right" data-target="#navbarResponsive"
+                type="button" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"
+                value="Menu"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link active js-scroll-trigger"
+                            href="#about">About</a></li>
+                    <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link js-scroll-trigger"
+                            href="#download">Caption Generator</a></li>
+                    <li class="nav-item nav-link js-scroll-trigger"><a class="nav-link js-scroll-trigger"
+                            href="#team">Team</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead" style="background-image:url('{{url_for('static',filename='assets/img/intro-bg.jpg')}}')">
+        <div class="intro-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 mx-auto">
+                        <h1 class="brand-heading">Image Captioning</h1>
+                        <p class="intro-text">A free, responsive, Image Captioning Website.</p><a
+                            class="btn btn-link btn-circle" role="button" href="#about"><i
+                                class="fa fa-angle-double-down animated"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="text-center content-section" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2>About this website</h2>
+                    <p>This website is made using bootstrap studio, you can dowload it code here
+                        &nbsp;<a href="https://github.com/BhishitDave" target="_blank">(github)</a>.For machine learning model we have used ResNet50 and Keras Model.</p>
+                    <p>We have used Microsoft computer vision api for caption generation using link</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="text-center download-section content-section" data-aos="fade" id="download"
+        style="background-image:url('{{url_for('static',filename='assets/img/downloads-bg.jpg')}}')">
+        <div class="container">
+            <div class="col-lg-8 mx-auto">
+                <p></p>
+            </div>
+        </div>
+        <div class="container">
+            <div class="">
+                <div class="container">
+                    <h1 class="heading">Image Captioning</h1>
+                    <p>Upload your Image to generate a caption..</p>
+                </div>
+            </div>
+
+
+
+            <form class="form-inline" enctype="multipart/form-data" action="/" method="POST" style="margin:5px">
+                <label><b>Image: &nbsp;&nbsp; </b></label>
+                <input type="file" class="" name="image">
+
+                <button type="submit" class="btn btn-primary">Caption</button>
+            </form>
+
+
+                <form class="form-inline" enctype="multipart/form-data" action="/upload" method="post">
+                    <label for="URL"><b>URL: &nbsp;&nbsp; </b></label>
+                    <input type="text" id="URL" name="urls" placeholder="URL" style="margin:5px ;width:31.2%">
+                    <button type="submit" class="btn btn-primary">Caption</button>
+                </form>
+                <!-- <form action="/upload" method="post">
+                    <label for="URL">URL</label>
+                    <input type="text" id="URL" name="urls" placeholder="LINK">
+                    <button type="submit">GEt Acption
+                    </button>
+                </form> -->
+                {% if result %}
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img src="{{result.image}}" class="images rounded float-left">
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text">Generated Caption : </p>
+                        <p><b> {{result.description}} </b> </p>
+                    </div>
+                    {% endif %}
+
+                </div>
+
+                <br>
+                <div class="container">
+                    {% if results %}
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <img src="{{results.image}}" class="images rounded float-left">
+                        </div>
+                        <div class="col-sm-8">
+
+                            <p class="text">Generated Caption : </p>
+                            <p><b> {{results.description}} </b> </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+        </div>
+
+    </section>
+    <div id="team">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6" style="text-align: center;"><img class="teamprofilepictures"
+                        src="{{url_for('static',filename='assets/img/Bhishit.jpg')}}">
+                    <h1 class="teamprofilenames">Bhishit Dave</h1>
+                    <h1 class="teamprofileprofessions">Full Stack Developer</h1>
+                    <p class="teamprofiledescription">I'm Bhishit Dave, an App Developer and Web Developer <br>
+                        I am in the penultimate year of my engineering at Manipal University, Jaipur, Most of the time you will find me sitting at my desk, fidgeting with my rubiks cube, trying to code or solving some bugs, and play chess most of the time.</p>
+                        <a href="https://www.linkedin.com/in/bhishit-dave-a82908187/ " target="_blank"><i class="fab fa-linkedin-in teamprofileicons"></i></a>
+                        
+                </div>
+                <div class="col-md-6" style="text-align: center;"><img class="teamprofilepictures"
+                        src="{{url_for('static',filename='assets/img/Aditya.jpeg')}}">
+                    <h1 class="teamprofilenames">Aditya Patil</h1>
+                    <h1 class="teamprofileprofessions">Frontend Developer</h1>
+                    <p class="teamprofiledescription">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
+                        nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                        <a href="https://www.linkedin.com/in/bhishit-dave-a82908187/ " target="_blank"><i class="fab fa-linkedin-in teamprofileicons"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{url_for('static',filename='assets/js/jquery.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/bootstrap/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/bs-init.js')}}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <script src="{{url_for('static',filename='assets/js/grayscale.js')}}"></script>
+</body>
+
+</html>
