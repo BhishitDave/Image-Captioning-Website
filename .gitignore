@@ -133,3 +133,7 @@ dmypy.json
 
 #apikey
 apikey.txt
+
+#images
+.jpg
+.jfif
