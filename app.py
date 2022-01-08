@@ -5,13 +5,15 @@ from caption import *
 import warnings
 warnings.filterwarnings("ignore")
 
-
+apikey=''
+with open('apikey.txt') as f:
+    apikey = f.read()
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
+def start_up_route():
 	return render_template('index.html')
 
 
@@ -30,9 +32,6 @@ def upload_file():
 	
 			caption = caption_this_image("static/"+img.filename)
 
-
-
-		
 			result_dic = {
 				'image' : "static/" + img.filename,
 				'description' : caption
@@ -50,7 +49,7 @@ def microsoftapi():
        payload = "{\r\"url\": \""+link+ "\"\r}"
        headers = {
         'content-type': "application/json",
-        'x-rapidapi-key': "29d5216d56msh53955adb28dd03bp1e4627jsnd42069f6bd6e",
+        'x-rapidapi-key': apikey,
         'x-rapidapi-host': "microsoft-computer-vision3.p.rapidapi.com"
         }
        response = requests.request("POST", url, data=payload, headers=headers, params=querystring).json()
